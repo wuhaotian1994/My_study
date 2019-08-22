@@ -3,11 +3,11 @@
 }
 #box{
 	border: 10px ridge #3B99FC;
-	margin-right:auto;
-	margin-left: auto;
+	margin-left:auto;
+	margin-right: auto;
 	margin-top:50px;
-	width: 60rem;
-	height: 40rem;
+	width: 800px;
+	height: 600px;
 	background-color: #F0F0F0;
 }
 .tank{
