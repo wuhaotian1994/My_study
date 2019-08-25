@@ -2,13 +2,14 @@ var cv;
 var context;
 var tk_1;
 var tk_2;
-var yxwidth=32.5;
-var yxheight=32.5;
+var yxwidth=60;
+var yxheight=60;
 var walls;
 var tk1;
 var tk2;
 var atime;
 var btime;
+//坦克对象，输入颜色（greed/red）以及出生地
 function Tank(color,x,y){
 	this.x=x;
 	this.y=y;
@@ -25,16 +26,28 @@ function Tank(color,x,y){
 window.onload=function(){
 	cv = document.getElementById("cv");
 	context=cv.getContext("2d");
-	tk1=new Tank("green",25,25);
-	tk2=new Tank("red",80,80);
+	tk1=new Tank("green",4*yxwidth,12*yxheight);
+	tk2=new Tank("red",8*yxwidth,12*yxheight);
 	// console.log(tk.top);
 	tk_1=tk1.top
 	tk_2=tk2.top
-	walls= new CreatWall("wall");
+	var wallimg=new Image();
+	wallimg.src="../img/wall.png";
+	var wall=new MianMap();
+	
 	setTimeout(() => {
 		context.drawImage(tk_1,tk1.x,tk1.y,yxwidth,yxheight);
 		context.drawImage(tk_2,tk2.x,tk2.y,yxwidth,yxheight);
-		
+		for(var i=0;i<13;i++){
+			for(var j=0;j<13;j++){
+				if(wall.wallarry[i][j])
+				context.drawImage(wallimg,i*60,j*60,yxwidth,yxheight);
+			}
+		}
+		context.clearRect(tk1.x,tk1.y,yxwidth,yxheight);
+		context.clearRect(tk2.x,tk2.y,yxwidth,yxheight);
+		context.drawImage(tk_1,tk1.x,tk1.y,yxwidth,yxheight);
+		context.drawImage(tk_2,tk2.x,tk2.y,yxwidth,yxheight);
 	}, 2000);
 
 	var akey=null;
@@ -64,7 +77,7 @@ window.onload=function(){
 			keypressed[event.keyCode]=true;
 			}
 	}
-}
+	}
 	document.onkeyup=function(event)
 	{
 		keypressed[event.keyCode]=false;
@@ -99,9 +112,10 @@ window.onload=function(){
 			bmove.moves("b",bkey="d");
 			
 		}
-	}}
+	}
+	}
 }
-
+//控制坦克移动，实例化p1和p2
 function Move(tankp,Arrow)
 {
 	this.tankp=tankp;
@@ -164,18 +178,30 @@ function Move(tankp,Arrow)
 	}
 }
 }
-function StopMove(tankp){
-	clearInterval( tankp);
+//随机生成map
+function MianMap(){
+	this.wallarry=new Array();
+	for(var i=0;i<13;i++){
+		this.wallarry[i]=new Array();
+		for(var j=0;j<13;j++){
+			if(i>0 && j>0){
+				if(this.wallarry[i-1][j-1]!=0 && this.wallarry[i-1][j]!=0 && this.wallarry[i][j-1]!=0){
+					this.wallarry[i][j]=0;
+					continue;
+				}
+				if(this.wallarry[i-1][j-1]==0 && this.wallarry[i-1][j]==0 && this.wallarry[i][j-1]==0){
+					this.wallarry[i][j]=1;
+					continue;
+				}
+			}
+			if(Math.round(Math.random()))
+				this.wallarry[i][j]=1;else
+				this.wallarry[i][j]=0;
+			
+		}
+	}
 }
-
-//想把所有动作都做到一个函数里来，这个函数完成绘画
-function GameConsole(key){
-	if(key="paused")
-		return clearInterval(r);
-	r=setInterval(() => {
-		
-	}, 16.6);
-}
+//创建墙
 function CreatWall(model){
 	this.wall=new Image();
 	this.wall.src="../img/"+model+".png";

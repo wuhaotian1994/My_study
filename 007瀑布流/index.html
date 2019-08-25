@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title >瀑布流</title>
+        <style>
+        *{
+            margin: 0;padding: 0;border: 0;
+        }
+        .li{
+            width:300px;
+            float: left;
+        }
+        #imgbox{
+            width: 900px;
+            border: solid 1px gray;
+            margin:auto;
+        }
+        .imgarry{
+            width: 280px;
+            margin: 10px;
+        }
+        </style>
+        <script type="text/javascript">
+            var one,two,tress;
+            var oneh,twoh,tressh;
+            window.onload=function(){ 
+                // var img = document.createElement("img");
+                // img.setAttribute("class", "imgarry");
+                // img.setAttribute("src","../img/redb.png");
+                // var onechild=document.getElementById("one");
+                // onechild.appendChild(img);
+                // onechild.appendChild(img);
+                // onechild.appendChild(img);
+                one=document.getElementById("one");
+                two=document.getElementById("two");
+                tress=document.getElementById("tress");
+                var i=0;
+                var timer=setInterval(function(){
+                    i++;
+                    if(i==50)
+                    clearInterval(timer);
+                    oneh=one.clientHeight||one.offsetHeight;
+                    twoh=two.clientHeight||two.offsetHeight;
+                    tressh=tress.clientHeight||tress.offsetHeight;
+                    if(oneh<=twoh){
+                        if(oneh<=tressh){
+                            new CreateImg("one",i);
+                        }else{
+                            new CreateImg("tress",i);
+                        }
+                    }else if(twoh<=tressh){
+                        new CreateImg("two",i);
+                    }else{
+                        new CreateImg("tress",i);
+                    }
+                },500);
+            }
+            function CreateImg(parents,test){
+                var img=document.createElement("img");
+                var parent=document.getElementById(parents);
+                img.setAttribute("class","imgarry");
+                img.setAttribute("src","C:/Users/Lion/Documents/HBuilderProjects/x ("+test+").jpg");
+                parent.appendChild(img);
+
+            }
+        </script>
+    </head>
+    <body>
+        <div id="imgbox">
+            <div id="one" class="li"></div>
+            <div id="two" class="li"></div>
+            <div id="tress" class="li"></div>
+        </div>
+    </body>
+</html>
