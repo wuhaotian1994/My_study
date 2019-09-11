@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<head>
+    <title>在线点餐</title>
+    <script src="js/vue.js"></script>
+    <script src="js/main.js"></script>
+
+</head>
+
+<body>
+    <div id="left_list" :title="title">
+        {{mainlist}}
+    </div>
+    <div id="right_list">
+        {{mainlist}}
+           <input v-model="mainlist">
+    </div>
+    <div id="bottom"></div>
+    
+</body>
