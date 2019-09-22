@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>跑马灯</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input id="start" type="button" value="开始" @click="start" />
+        <input id="stop" type="button" value="停止" @click="stop" />
+        <input id="speed" type="number" v-model:value="speed" />
+        <h4>{{msg}}</h4>
+        {{speed}}
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'这是一个很时尚得跑马灯！！！',
+                timeid:null,
+                speed:20
+            },
+            methods: {
+                start(){
+                    if(!this.timeid){
+                    this.timeid= setInterval(() => {    
+                    var star=this.msg.substring(0,1)
+                    var end=this.msg.substring(1)
+                    this.msg=end+star
+                    }, 1000-this.speed);
+                    }
+                },
+                stop(){
+                    clearInterval(this.timeid)
+                    this.timeid=null
+                }
+            }
+
+        })
+    </script>
+</body>
