@@ -17,7 +17,7 @@
 
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">AddData</h3>
+                <h3 class="panel-title" v-sizes="800">AddData</h3>
             </div>
             <div class="panel-body form-inline">
                 <label>
@@ -26,12 +26,12 @@
                 </label>
                 <label>
                     Name:
-                    <input type="text" class="form-control" v-model="name" @keyup.enter="add">
+                    <input type="text" class="form-control" v-model="name" @keyup.enter="add" v-sizes="1900">
                 </label>
                 <input type="button" value="Add" class="btn btn-primary" @click="add">
                 <label>
                     Search:
-                    <input type="text" class="form-control" v-model="keywords">
+                    <input type="text" class="form-control" v-model="keywords" v-foucs v-color v-sizes="1900">
                 </label>
             </div>
         </div>
@@ -66,6 +66,36 @@
             var d = dt.getDate()
             return `${y}-${m}-${d}`
         })
+
+        Vue.directive('color', {
+            bind: function (el) {
+                el.style.color = 'red'
+            },
+            inserted: function (el) {
+
+            },
+            updated: function (el) {
+
+            }
+        })
+
+        Vue.directive('sizes', function (el, arg) {
+                el.style.fontWeight = arg.value
+            
+        })
+
+        Vue.directive('foucs', {
+            bind: function (el) {
+
+            },
+            inserted: function (el) {
+                el.focus()
+            },
+            updated: function (el) {
+
+            },
+        })
+
         var vm = new Vue({
             el: '#app',
             data: {
