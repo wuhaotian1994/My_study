@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="app">
+        
+        
+        <div class="panel panel-primary">
+              <div class="panel-heading">
+                    <h3 class="panel-title">Add Product</h3>
+              </div>
+              <div class="panel-body form-inline">
+                    <label>
+                        Name:
+                        <input type="text" v-model="id">
+                    </label>
+                    <label>
+                        <input type="button" value="Add" @click="addproduct()">
+                    </label>
+              </div>
+        </div>
+        
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Ctime</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in list" :key="item.id">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.ctime}}</td>
+                    <td>
+                        <a src="">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+
+    <script>
+    var vm=new Vue({
+        el:'#app',
+        data:{
+            id:'',
+            name:'',
+            ctime:'',
+            list:[
+                {id:1,name:'BMW',ctime:new Date()},
+                {id:2,name:'Benz',ctime:new Date()},
+                {id:3,name:'Audi',ctime:new Date()}
+            ]
+
+        },
+        methods:{
+            addproduct() {
+                
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>
